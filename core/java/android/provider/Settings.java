@@ -9571,6 +9571,12 @@ public final class Settings {
          */
         public static final String STATUS_BAR_SHOW_NETWORK_ACTIVITY = "status_bar_show_network_activity";
 
+        /**
+         * Option to hide the Bluetooth icon in the status bar when disconnected.
+	 * @hide
+         */
+        public static final String SHOW_BLUETOOTH_ICON = "show_bluetooth_icon";
+
     }
 
     /**
