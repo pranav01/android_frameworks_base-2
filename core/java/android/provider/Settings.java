@@ -9589,6 +9589,15 @@ public final class Settings {
          */
         public static final String STATUS_BAR_GREETING_TIMEOUT = "status_bar_greeting_timeout";
 
+        /**
+         * Call recording format value
+         * 0: AMR_WB
+         * 1: MPEG_4
+         * Default: 0
+         * @hide
+         */
+        public static final String CALL_RECORDING_FORMAT = "call_recording_format";
+
     }
 
     /**
