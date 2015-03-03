@@ -9598,6 +9598,18 @@ public final class Settings {
          */
         public static final String CALL_RECORDING_FORMAT = "call_recording_format";
 
+        /**
+         * Put on your ear, and this will automatically call current number in dialer
+         * @hide
+         */
+        public static final String DIRECT_CALL_FOR_DIALER = "direct_call_for_dialer";
+
+        /**
+         * Put on your ear, and this will automatically call current number in message
+         * @hide
+         */
+        public static final String DIRECT_CALL_FOR_MMS = "direct_call_for_mms";
+
     }
 
     /**
