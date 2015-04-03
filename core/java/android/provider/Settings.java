@@ -8770,6 +8770,13 @@ public final class Settings {
          */
         public static final String FORMAL_TEXT_INPUT = "formal_text_input";
 
+        /**
+         * Quick Settings Smart Pulldown
+         *
+         * @hide
+         */
+        public static final String QS_SMART_PULLDOWN = "qs_smart_pulldown";
+
     }
 
     /**

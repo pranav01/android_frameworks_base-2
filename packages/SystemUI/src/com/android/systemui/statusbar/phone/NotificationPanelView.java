@@ -191,6 +191,7 @@ public class NotificationPanelView extends PanelView implements
     private boolean mDoubleTapToSleepEnabled;
     private int mStatusBarHeaderHeight;
     private GestureDetector mDoubleTapGesture;
+    private int mQsSmartPullDown;
 
     public NotificationPanelView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -723,6 +724,14 @@ public class NotificationPanelView extends PanelView implements
                 && event.getPointerCount() == 2);
         boolean oneFingerQsOverride = event.getActionMasked() == MotionEvent.ACTION_DOWN
                 && shouldQuickSettingsIntercept(event.getX(), event.getY(), -1, false);
+
+        if (mQsSmartPullDown == 1 && !mStatusBar.hasActiveClearableNotifications()
+                || mQsSmartPullDown == 2 && !mStatusBar.hasActiveVisibleNotifications()
+                || (mQsSmartPullDown == 3 && (!mStatusBar.hasActiveVisibleNotifications()
+                        || !mStatusBar.hasActiveClearableNotifications()))) {
+            oneFingerQsOverride = true;
+        }
+
         if ((twoFingerQsEvent || oneFingerQsOverride)
                 && event.getY(event.getActionIndex()) < mStatusBarMinHeight) {
             mQsExpandImmediate = true;
@@ -2089,6 +2098,9 @@ public class NotificationPanelView extends PanelView implements
                     Settings.System.QS_QUICK_PULLDOWN), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.CMREMIX.getUriFor(
+                    Settings.CMREMIX.QS_SMART_PULLDOWN),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -2105,6 +2117,9 @@ public class NotificationPanelView extends PanelView implements
                     Settings.System.QS_QUICK_PULLDOWN, 0, UserHandle.USER_CURRENT);
             mDoubleTapToSleepEnabled = Settings.System.getIntForUser(resolver,
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 1, UserHandle.USER_CURRENT) == 1;
+            mQsSmartPullDown = Settings.CMREMIX.getIntForUser(
+                    resolver, Settings.CMREMIX.QS_SMART_PULLDOWN, 0,
+                    UserHandle.USER_CURRENT);
         }
     }
 }
