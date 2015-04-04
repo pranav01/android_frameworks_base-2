@@ -179,6 +179,9 @@ public class NetworkTraffic extends TextView {
             resolver.registerContentObserver(Settings.System
                     .getUriFor(Settings.CMREMIX.NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD), false,
                     this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.CMREMIX
+                    .getUriFor(Settings.CMREMIX.NETWORK_TRAFFIC_COLOR), false,
+                    this, UserHandle.USER_ALL);
         }
 
         /*
@@ -268,6 +271,20 @@ public class NetworkTraffic extends TextView {
                 UserHandle.USER_CURRENT);
 
         mState = Settings.CMREMIX.getInt(resolver, Settings.CMREMIX.NETWORK_TRAFFIC_STATE, 0);
+
+	    int defaultColor = Settings.CMREMIX.getInt(resolver,
+                Settings.CMREMIX.NETWORK_TRAFFIC_COLOR, 0xFFFFFFFF);
+
+	    int mNetworkTrafficColor = Settings.CMREMIX.getInt(resolver,
+                Settings.CMREMIX.NETWORK_TRAFFIC_COLOR, -2);
+
+	    if (mNetworkTrafficColor == Integer.MIN_VALUE
+                || mNetworkTrafficColor == -2) {
+            mNetworkTrafficColor = defaultColor;
+        }
+
+	    setTextColor(mNetworkTrafficColor);
+
         if (isSet(mState, MASK_UNIT)) {
             KB = KILOBYTE;
         } else {
