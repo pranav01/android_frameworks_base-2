@@ -1330,10 +1330,7 @@ public class AppTransition implements Dump {
         for (int i = 0; i < 11; i++) {
             mActivityAnimations[i] = Settings.CMREMIX.getInt(resolver, Settings.CMREMIX.ACTIVITY_ANIMATION_CONTROLS[i], 0);
         }
-
         mNoOverrides = Settings.CMREMIX.getBoolean(resolver, Settings.CMREMIX.ANIMATION_CONTROLS_NO_OVERRIDE, false);
-
-        int temp = Settings.CMREMIX.getInt(resolver, Settings.CMREMIX.ANIMATION_CONTROLS_DURATION, 0);
-        mAnimationDuration = temp * 15;
+        mAnimationDuration = Settings.CMREMIX.getInt(resolver, Settings.CMREMIX.ANIMATION_CONTROLS_DURATION, 25);
     }
 }
