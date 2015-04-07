@@ -201,6 +201,7 @@ public class NotificationPanelView extends PanelView implements
 
     private int mQSBackgroundColor;
     private boolean mQSShadeTransparency = false;
+    private boolean mQSCSwitch = false;
 
     public NotificationPanelView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -279,7 +280,13 @@ public class NotificationPanelView extends PanelView implements
                 }
             }
         });
-        setQSBackgroundColor();
+
+        mQSCSwitch = Settings.System.getInt(getContext().getContentResolver(),
+                Settings.System.QS_COLOR_SWITCH, 0) == 1;
+
+        if (mQSCSwitch) {
+            setQSBackgroundColor();
+        }
     }
 
     @Override
@@ -2139,21 +2146,25 @@ public class NotificationPanelView extends PanelView implements
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
+            update();
             ContentResolver resolver = mContext.getContentResolver();
             if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.QS_BACKGROUND_COLOR))
-                || uri.equals(Settings.System.getUriFor(
-                    Settings.System.QS_TRANSPARENT_SHADE))) {
-                mQSBackgroundColor = Settings.System.getInt(
-                        resolver, Settings.System.QS_BACKGROUND_COLOR, 0xff263238);
-                mQSShadeTransparency = Settings.System.getInt(
-                        resolver, Settings.System.QS_TRANSPARENT_SHADE, 0) == 1;
-                setQSBackgroundColor();
-            } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.QS_ICON_COLOR))
-                || uri.equals(Settings.System.getUriFor(
-                    Settings.System.QS_TEXT_COLOR))) {
-                setQSColors();
+                    Settings.System.QS_COLOR_SWITCH))) {
+                if (uri.equals(Settings.System.getUriFor(
+                        Settings.System.QS_BACKGROUND_COLOR))
+                    || uri.equals(Settings.System.getUriFor(
+                        Settings.System.QS_TRANSPARENT_SHADE))) {
+                    mQSBackgroundColor = Settings.System.getInt(
+                            resolver, Settings.System.QS_BACKGROUND_COLOR, 0xff263238);
+                    mQSShadeTransparency = Settings.System.getInt(
+                            resolver, Settings.System.QS_TRANSPARENT_SHADE, 0) == 1;
+                    setQSBackgroundColor();
+                } else if (uri.equals(Settings.System.getUriFor(
+                        Settings.System.QS_ICON_COLOR))
+                    || uri.equals(Settings.System.getUriFor(
+                        Settings.System.QS_TEXT_COLOR))) {
+                    setQSColors();
+                }
             }
         }
 
@@ -2163,17 +2174,22 @@ public class NotificationPanelView extends PanelView implements
                     Settings.System.QS_QUICK_PULLDOWN, 0, UserHandle.USER_CURRENT);
             mDoubleTapToSleepEnabled = Settings.System.getIntForUser(resolver,
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 1, UserHandle.USER_CURRENT) == 1;
-            mQsSmartPullDown = Settings.CMREMIX.getIntForUser(resolver,
-                    Settings.CMREMIX.QS_SMART_PULLDOWN, 0, UserHandle.USER_CURRENT);
+            mQsSmartPullDown = Settings.CMREMIX.getIntForUser(
+                    resolver, Settings.CMREMIX.QS_SMART_PULLDOWN, 0,
+                    UserHandle.USER_CURRENT);
             mStatusBarLockedOnSecureKeyguard = Settings.Secure.getIntForUser(
                     resolver, Settings.Secure.STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD, 1,
                     UserHandle.USER_CURRENT) == 1;
+            mQSCSwitch = Settings.System.getInt(
+                    resolver, Settings.System.QS_COLOR_SWITCH, 0) == 1;
 			mQSBackgroundColor = Settings.System.getInt(
                     resolver, Settings.System.QS_BACKGROUND_COLOR, 0xff263238);
             mQSShadeTransparency = Settings.System.getInt(
                     resolver, Settings.System.QS_TRANSPARENT_SHADE, 0) == 1;
-            setQSBackgroundColor();
-            setQSColors();
+            if (mQSCSwitch) {
+                setQSBackgroundColor();
+                setQSColors();
+            }
         }
     }
 
