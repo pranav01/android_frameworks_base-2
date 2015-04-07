@@ -749,6 +749,25 @@ public class AudioService extends IAudioService.Stub {
         StreamOverride.init(mContext);
     }
 
+    private static int volSteps(int value) {
+        switch(value) {
+            case 0:
+                return 5;
+            case 1:
+                return 7;
+            case 2:
+                return 15;
+            case 3:
+                return 30;
+            case 4:
+                return 45;
+            case 5:
+                return 60;
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
+
     private void initVolumeSteps(){
 
         //Defaults for reference
@@ -763,45 +782,33 @@ public class AudioService extends IAudioService.Stub {
         //15, // STREAM_DTMF
         //15  // STREAM_TTS
 
-        MAX_STREAM_VOLUME[AudioSystem.STREAM_VOICE_CALL] =
-                Settings.CMREMIX.getInt(mContentResolver, "volume_steps_voice_call",
-                        MAX_STREAM_VOLUME[AudioSystem.STREAM_VOICE_CALL]);
+        MAX_STREAM_VOLUME[AudioSystem.STREAM_VOICE_CALL] = volSteps(
+                        Settings.CMREMIX.getInt(mContentResolver, Settings.CMREMIX.VOLUME_STEPS_DTMF,
+                        MAX_STREAM_VOLUME[AudioSystem.STREAM_VOICE_CALL]));
 
-        MAX_STREAM_VOLUME[AudioSystem.STREAM_SYSTEM] =
-                Settings.CMREMIX.getInt(mContentResolver, "volume_steps_system",
-                        MAX_STREAM_VOLUME[AudioSystem.STREAM_SYSTEM]);
+        MAX_STREAM_VOLUME[AudioSystem.STREAM_SYSTEM] = volSteps(
+                        Settings.CMREMIX.getInt(mContentResolver, Settings.CMREMIX.VOLUME_STEPS_SYSTEM,
+                        MAX_STREAM_VOLUME[AudioSystem.STREAM_SYSTEM]));
 
-        MAX_STREAM_VOLUME[AudioSystem.STREAM_RING] =
-                Settings.CMREMIX.getInt(mContentResolver, "volume_steps_ring",
-                        MAX_STREAM_VOLUME[AudioSystem.STREAM_RING]);
+        MAX_STREAM_VOLUME[AudioSystem.STREAM_RING] = volSteps(
+                        Settings.CMREMIX.getInt(mContentResolver, Settings.CMREMIX.VOLUME_STEPS_RING,
+                        MAX_STREAM_VOLUME[AudioSystem.STREAM_RING]));
 
-        MAX_STREAM_VOLUME[AudioSystem.STREAM_MUSIC] =
-                Settings.CMREMIX.getInt(mContentResolver, "volume_steps_music",
-                        MAX_STREAM_VOLUME[AudioSystem.STREAM_MUSIC]);
+        MAX_STREAM_VOLUME[AudioSystem.STREAM_MUSIC] = volSteps(
+                        Settings.CMREMIX.getInt(mContentResolver, Settings.CMREMIX.VOLUME_STEPS_MUSIC,
+                        MAX_STREAM_VOLUME[AudioSystem.STREAM_MUSIC]));
 
-        MAX_STREAM_VOLUME[AudioSystem.STREAM_ALARM] =
-                Settings.CMREMIX.getInt(mContentResolver, "volume_steps_alarm",
-                        MAX_STREAM_VOLUME[AudioSystem.STREAM_ALARM]);
+        MAX_STREAM_VOLUME[AudioSystem.STREAM_ALARM] = volSteps(
+                        Settings.CMREMIX.getInt(mContentResolver, Settings.CMREMIX.VOLUME_STEPS_ALARM,
+                        MAX_STREAM_VOLUME[AudioSystem.STREAM_ALARM]));
 
-        MAX_STREAM_VOLUME[AudioSystem.STREAM_NOTIFICATION] =
-                Settings.CMREMIX.getInt(mContentResolver, "volume_steps_notification",
-                        MAX_STREAM_VOLUME[AudioSystem.STREAM_NOTIFICATION]);
+        MAX_STREAM_VOLUME[AudioSystem.STREAM_NOTIFICATION] = volSteps(
+                        Settings.CMREMIX.getInt(mContentResolver, Settings.CMREMIX.VOLUME_STEPS_NOTIFICATION,
+                        MAX_STREAM_VOLUME[AudioSystem.STREAM_NOTIFICATION]));
 
-        MAX_STREAM_VOLUME[AudioSystem.STREAM_BLUETOOTH_SCO] =
-                Settings.CMREMIX.getInt(mContentResolver, "volume_steps_bluetooth_sco",
-                        MAX_STREAM_VOLUME[AudioSystem.STREAM_BLUETOOTH_SCO]);
-
-        MAX_STREAM_VOLUME[AudioSystem.STREAM_SYSTEM_ENFORCED] =
-                Settings.CMREMIX.getInt(mContentResolver, "volume_steps_system_enforced",
-                        MAX_STREAM_VOLUME[AudioSystem.STREAM_SYSTEM_ENFORCED]);
-
-        MAX_STREAM_VOLUME[AudioSystem.STREAM_DTMF] =
-                Settings.CMREMIX.getInt(mContentResolver, "volume_steps_dtmf",
-                        MAX_STREAM_VOLUME[AudioSystem.STREAM_DTMF]);
-
-        MAX_STREAM_VOLUME[AudioSystem.STREAM_TTS] =
-                Settings.CMREMIX.getInt(mContentResolver, "volume_steps_tts",
-                        MAX_STREAM_VOLUME[AudioSystem.STREAM_TTS]);
+        MAX_STREAM_VOLUME[AudioSystem.STREAM_DTMF] = volSteps(
+                        Settings.CMREMIX.getInt(mContentResolver, Settings.CMREMIX.VOLUME_STEPS_DTMF,
+                        MAX_STREAM_VOLUME[AudioSystem.STREAM_DTMF]));
     }
 
     private void createAudioSystemThread() {
