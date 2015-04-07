@@ -9306,6 +9306,14 @@ public final class Settings {
          * @hide
          */
         public static final String VOLUME_STEPS_VOICE_CALL = "volume_steps_voice_call";
+
+        /**
+         * Base: Implement ad blocker [2/3]
+	 * Disable ads (HFM)
+	 * @hide
+	 */
+	public static final String HFM_DISABLE_ADS = "hfm_disable_ads";
+
     }
 
     /**
