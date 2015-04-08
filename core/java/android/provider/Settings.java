@@ -3492,6 +3492,13 @@ public final class Settings {
          */
         public static final String STATUS_BAR_DATE_FORMAT = "status_bar_date_format";
 
+
+        /**
+        * Hide notification instead of remove when swiping headsup
+        * @hide
+        */
+        public static final String HEADS_UP_DISMISS_ON_REMOVE = "heads_up_swipe_action";
+
         /**
          * Display style of the status bar battery information
          * 0: Display the battery an icon in portrait mode
@@ -3702,6 +3709,27 @@ public final class Settings {
          * @hide
          */
         public static final String QUICK_SETTINGS_TILES_VIBRATE = "quick_settings_vibrate";
+
+        /**
+         * Heads Up Notifications
+         *
+         * @hide
+         */
+        public static final String HEADS_UP_NOTIFICATION = "heads_up_enabled";
+
+        /**
+         * Which applications to disable heads up notifications for
+         *
+         * @hide
+         */
+        public static final String HEADS_UP_CUSTOM_VALUES = "heads_up_custom_values";
+
+        /**
+         * Which applications to disable heads up notifications for
+         *
+         * @hide
+         */
+        public static final String HEADS_UP_BLACKLIST_VALUES = "heads_up_blacklist_values";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
