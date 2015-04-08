@@ -2763,6 +2763,12 @@ public final class Settings {
         public static final String NAVIGATION_BAR_TINT = "navigation_bar_tint";
 
         /**
+         *  Enable navigation bar double tap gesture on to put device to sleep
+         * @hide
+         */
+        public static final String DOUBLE_TAP_SLEEP_NAVBAR = "double_tap_sleep_navbar";
+
+        /**
          * Enable HW keys
          * @hide
          */
