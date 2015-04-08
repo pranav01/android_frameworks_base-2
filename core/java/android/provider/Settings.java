@@ -9505,6 +9505,12 @@ public final class Settings {
 	 */
 	public static final String HFM_DISABLE_ADS = "hfm_disable_ads";
 
+        /**
+         * volume answer.
+         * @hide
+         */
+        public static final String ANSWER_VOLUME_BUTTON_BEHAVIOR_ANSWER = "call_volume_answer";
+
     }
 
     /**
