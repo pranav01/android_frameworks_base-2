@@ -28,6 +28,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.graphics.PorterDuff.Mode;
 import android.provider.AlarmClock;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -275,7 +276,6 @@ public class KeyguardStatusView extends GridLayout implements
             mWeatherHumidity.setText(null);
             mWeatherConditionText.setText(null);
             mWeatherTimestamp.setText(null);
-            mWeatherView.setVisibility(View.GONE);
             updateWeatherSettings(true);
         } else {
             mWeatherCity.setText(info.city);
@@ -285,7 +285,6 @@ public class KeyguardStatusView extends GridLayout implements
             mWeatherHumidity.setText(info.humidity);
             mWeatherConditionText.setText(info.condition);
             mWeatherTimestamp.setText(getCurrentDate());
-            mWeatherView.setVisibility(mShowWeather ? View.VISIBLE : View.GONE);
             updateWeatherSettings(false);
         }
     }
@@ -317,12 +316,18 @@ public class KeyguardStatusView extends GridLayout implements
         int defaultPrimaryTextColor =
                 res.getColor(R.color.keyguard_default_primary_text_color);
         int primaryTextColor = Settings.System.getInt(resolver,
-                Settings.System.LOCK_SCREEN_WEATHER_TEXT_COLOR, defaultPrimaryTextColor);
-        int secondaryTextColor = (179 << 24) | (primaryTextColor & 0x00ffffff); // primaryTextColor with a transparency of 70%
+                Settings.System.LOCK_SCREEN_TEXT_COLOR, defaultPrimaryTextColor);
+
+        // primaryTextColor with a transparency of 70%
+        int secondaryTextColor = (179 << 24) | (primaryTextColor & 0x00ffffff);
+        // primaryTextColor with a transparency of 50%
+        int alarmTextAndIconColor = (128 << 24) | (primaryTextColor & 0x00ffffff);
+
         int defaultIconColor =
                 res.getColor(R.color.keyguard_default_icon_color);
         int iconColor = Settings.System.getInt(resolver,
-                Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR, defaultIconColor);
+                Settings.System.LOCK_SCREEN_ICON_COLOR, defaultIconColor);
+
         if (forceHide) {
             mWeatherView.setVisibility(View.GONE);
         } else {
@@ -331,18 +336,29 @@ public class KeyguardStatusView extends GridLayout implements
         mWeatherCity.setVisibility(showLocation ? View.VISIBLE : View.INVISIBLE);
         mWeatherTimestamp.setVisibility(showTimestamp ? View.VISIBLE : View.GONE);
 
+        mAlarmStatusView.setTextColor(alarmTextAndIconColor);
+        mDateView.setTextColor(primaryTextColor);
+        mClockView.setTextColor(primaryTextColor);
         mWeatherCity.setTextColor(primaryTextColor);
         mWeatherConditionText.setTextColor(primaryTextColor);
         mWeatherCurrentTemp.setTextColor(primaryTextColor);
         mWeatherHumidity.setTextColor(secondaryTextColor);
         mWeatherWind.setTextColor(secondaryTextColor);
         mWeatherTimestamp.setTextColor(secondaryTextColor);
+        mOwnerInfo.setTextColor(primaryTextColor);
 
         if (mIconNameValue != iconNameValue) {
             mIconNameValue = iconNameValue;
             mWeatherController.updateWeather();
         }
-
+        Drawable[] drawables = mAlarmStatusView.getCompoundDrawablesRelative();
+        Drawable alarmIcon = null;
+        mAlarmStatusView.setCompoundDrawablesRelative(null, null, null, null);
+        if (drawables[0] != null) {
+            alarmIcon = drawables[0];
+            alarmIcon.setColorFilter(alarmTextAndIconColor, Mode.MULTIPLY);
+        }
+        mAlarmStatusView.setCompoundDrawablesRelative(alarmIcon, null, null, null);
         mWeatherConditionImage.setImageDrawable(null);
         Drawable weatherIcon = mWeatherConditionDrawable;
         if (iconNameValue == 0 || colorizeAllIcons) {
