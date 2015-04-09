@@ -64,6 +64,7 @@ import com.android.systemui.qs.tiles.PowerMenuTile;
 import com.android.systemui.qs.tiles.RoamingTile;
 import com.android.systemui.qs.tiles.RebootTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
+import com.android.systemui.qs.tiles.SlimActionTile;
 import com.android.systemui.qs.tiles.VisualizerTile;
 import com.android.systemui.qs.tiles.ScreenOffTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
@@ -338,8 +339,6 @@ public class QSTileHost implements QSTile.Host {
                 return new VisualizerTile(this);
             case QSConstants.TILE_SCREEN_TIMEOUT:
                 return new ScreenTimeoutTile(this);
-            case QSConstants.TILE_LIVE_DISPLAY:
-                return new LiveDisplayTile(this);
             case QSConstants.TILE_SCREENSHOT:
                 return new ScreenshotTile(this);
             case QSConstants.TILE_SYNC:
@@ -364,6 +363,10 @@ public class QSTileHost implements QSTile.Host {
                 return new UsbTetherTile(this);
             case QSConstants.TILE_AMBIENT_DISPLAY:
                 return new AmbientDisplayTile(this);
+            case QSConstants.TILE_LIVE_DISPLAY:
+                return new LiveDisplayTile(this);
+            case QSConstants.TILE_SLIMACTION:
+                return new SlimActionTile(this);
             default:
                 throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
         }

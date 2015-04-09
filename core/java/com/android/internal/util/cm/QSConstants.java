@@ -46,7 +46,6 @@ public class QSConstants {
     public static final String TILE_LTE = "lte";
     public static final String TILE_VISUALIZER = "visualizer";
     public static final String TILE_SCREEN_TIMEOUT = "screen_timeout";
-    public static final String TILE_LIVE_DISPLAY = "live_display";
     public static final String TILE_SCREENSHOT = "screenshot";
     public static final String TILE_SYNC = "sync";
     public static final String TILE_BRIGHTNESS = "brightness";
@@ -59,6 +58,8 @@ public class QSConstants {
     public static final String TILE_APPCIRCLEBAR = "toggleAppCircleBar";
     public static final String TILE_USB_TETHER = "usb_tether";
     public static final String TILE_AMBIENT_DISPLAY = "ambient_display";
+    public static final String TILE_LIVE_DISPLAY = "live_display";
+    public static final String TILE_SLIMACTION = "slimaction";
 
     // Order matters
     protected static final ArrayList<String> TILES_DEFAULT = new ArrayList<String>();
@@ -95,7 +96,6 @@ public class QSConstants {
         TILES_AVAILABLE.add(TILE_LTE);
         TILES_AVAILABLE.add(TILE_VISUALIZER);
         TILES_AVAILABLE.add(TILE_SCREEN_TIMEOUT);
-        TILES_AVAILABLE.add(TILE_LIVE_DISPLAY);
         TILES_AVAILABLE.add(TILE_SCREENSHOT);
         TILES_AVAILABLE.add(TILE_SYNC);
         TILES_AVAILABLE.add(TILE_BRIGHTNESS);
@@ -108,5 +108,7 @@ public class QSConstants {
         TILES_AVAILABLE.add(TILE_APPCIRCLEBAR);
         TILES_AVAILABLE.add(TILE_USB_TETHER);
         TILES_AVAILABLE.add(TILE_AMBIENT_DISPLAY);
+        TILES_AVAILABLE.add(TILE_LIVE_DISPLAY);
+        TILES_AVAILABLE.add(TILE_SLIMACTION);
     }
 }
