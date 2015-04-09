@@ -4152,13 +4152,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mContext.recreateTheme();
             recreateStatusBar();
 
-        // detect theme change.
-        ThemeConfig newTheme = res.getConfiguration().themeConfig;
-        if (newTheme != null &&
-                (mCurrentTheme == null || !mCurrentTheme.equals(newTheme))) {
-            mCurrentTheme = (ThemeConfig)newTheme.clone();
-            recreateStatusBar();
-
             // detect status bar carrier state when theme change.
             mShowStatusBarCarrier = Settings.CMREMIX.getInt(
                     resolver, Settings.CMREMIX.STATUS_BAR_CARRIER, 0) == 1;
