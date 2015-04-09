@@ -58,7 +58,6 @@ public class KeyguardStatusView extends GridLayout implements
 
     private LockPatternUtils mLockPatternUtils;
 
-    private View mWeatherView;
     private TextView mAlarmStatusView;
     private TextClock mDateView;
     private TextClock mClockView;
