@@ -376,6 +376,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     private boolean mShowCarrierInPanel = false;
     private boolean mShowLabel;
+    private int mShowLabelTimeout;
 
     // Status bar carrier
     private boolean mShowStatusBarCarrier;
@@ -493,6 +494,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.CMREMIX.getUriFor(
                     Settings.CMREMIX.STATUS_BAR_GREETING),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.CMREMIX.getUriFor(
+                    Settings.CMREMIX.STATUS_BAR_GREETING_TIMEOUT),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -587,8 +591,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             if (mGreeting != null && !TextUtils.isEmpty(mGreeting)) {
                 mCmremixLabel.setText(mGreeting);
             }
+
             mBatterySaverBarColor = Settings.System.getInt(
                     resolver, Settings.System.BATTERY_SAVER_MODE_COLOR, 1) == 1;
+            mShowLabelTimeout = Settings.CMREMIX.getIntForUser(resolver,
+                    Settings.CMREMIX.STATUS_BAR_GREETING_TIMEOUT, 400, mCurrentUserId);
         }
     }
 
@@ -2537,7 +2544,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         mCmremixLabel.animate().cancel();
                         mCmremixLabel.animate()
                                 .alpha(1f)
-                                .setDuration(400)
+                                .setDuration(mShowLabelTimeout)
                                 .setInterpolator(ALPHA_IN)
                                 .setStartDelay(50)
                                 .withEndAction(new Runnable() {
@@ -4124,6 +4131,16 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mShowStatusBarCarrier = Settings.CMREMIX.getInt(
                     resolver, Settings.CMREMIX.STATUS_BAR_CARRIER, 0) == 1;
             showStatusBarCarrierLabel(mShowStatusBarCarrier);
+
+            mGreeting = Settings.CMREMIX.getStringForUser(resolver,
+                    Settings.CMREMIX.STATUS_BAR_GREETING,
+                    UserHandle.USER_CURRENT);
+            if (mGreeting != null && !TextUtils.isEmpty(mGreeting)) {
+                mCmremixLabel.setText(mGreeting);
+            }
+            mShowLabelTimeout = Settings.CMREMIX.getIntForUser(resolver,
+                    Settings.CMREMIX.STATUS_BAR_GREETING_TIMEOUT, 400,
+                    UserHandle.USER_CURRENT);
 
         } else {
             loadDimens();
