@@ -99,6 +99,7 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.NotificationListenerService.RankingMap;
 import android.service.notification.StatusBarNotification;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.DisplayMetrics;
 import android.util.EventLog;
@@ -331,6 +332,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     // the icons themselves
     IconMerger mNotificationIcons;
     View mNotificationIconArea;
+    TextView mCmremixLabel;
 
     // [+>
     View mMoreIcon;
@@ -349,6 +351,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     // settings
     View mFlipSettingsView;
     private QSPanel mQSPanel;
+    String mGreeting = "";
 
     // top bar
     StatusBarHeaderView mHeader;
@@ -372,6 +375,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private int mStatusBarHeaderHeight;
 
     private boolean mShowCarrierInPanel = false;
+    private boolean mShowLabel;
 
     // Status bar carrier
     private boolean mShowStatusBarCarrier;
@@ -486,6 +490,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_TOUCH_OUTSIDE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.CMREMIX.getUriFor(
+                    Settings.CMREMIX.STATUS_BAR_GREETING),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -574,6 +581,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             // This method reads Settings.Secure.RECENTS_LONG_PRESS_ACTIVITY
             updateCustomRecentsLongPressHandler(false);
 
+            mGreeting = Settings.CMREMIX.getStringForUser(resolver,
+                    Settings.CMREMIX.STATUS_BAR_GREETING,
+                    UserHandle.USER_CURRENT);
+            if (mGreeting != null && !TextUtils.isEmpty(mGreeting)) {
+                mCmremixLabel.setText(mGreeting);
+            }
             mBatterySaverBarColor = Settings.System.getInt(
                     resolver, Settings.System.BATTERY_SAVER_MODE_COLOR, 1) == 1;
         }
@@ -1018,6 +1031,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mNotificationIconArea = mStatusBarView.findViewById(R.id.notification_icon_area_inner);
         mNotificationIcons = (IconMerger)mStatusBarView.findViewById(R.id.notificationIcons);
         mMoreIcon = mStatusBarView.findViewById(R.id.moreIcon);
+        mCmremixLabel = (TextView)mStatusBarView.findViewById(R.id.cmremix_custom_label);
         mNotificationIcons.setOverflowIndicator(mMoreIcon);
         mStatusBarContents = (LinearLayout)mStatusBarView.findViewById(R.id.status_bar_contents);
 
@@ -2434,7 +2448,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     /**
      * State is one or more of the DISABLE constants from StatusBarManager.
      */
-    public void disable(int state, boolean animate) {
+    public void disable(int state, final boolean animate) {
         mDisabledUnmodified = state;
         state = adjustDisableFlags(state);
         final int old = mDisabled;
@@ -2517,7 +2531,28 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 }
                 animateStatusBarHide(mNotificationIconArea, animate);
             } else {
-                animateStatusBarShow(mNotificationIconArea, animate);
+                if (mGreeting != null && !TextUtils.isEmpty(mGreeting) && mShowLabel) {
+                    if (animate) {
+                        mCmremixLabel.setVisibility(View.VISIBLE);
+                        mCmremixLabel.animate().cancel();
+                        mCmremixLabel.animate()
+                                .alpha(1f)
+                                .setDuration(400)
+                                .setInterpolator(ALPHA_IN)
+                                .setStartDelay(50)
+                                .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                labelAnimatorFadeOut(animate);
+                            }
+                        });
+                    } else {
+                        labelAnimatorFadeOut(animate);
+                    }
+                    mShowLabel = false;
+                } else {
+                    animateStatusBarShow(mNotificationIconArea, animate);
+                }
             }
         }
 
@@ -2580,6 +2615,22 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     .setStartDelay(mKeyguardFadingAwayDelay)
                     .start();
         }
+    }
+
+    protected void labelAnimatorFadeOut(final boolean animate) {
+        mCmremixLabel.animate().cancel();
+        mCmremixLabel.animate()
+                .alpha(0f)
+                .setDuration(200)
+                .setStartDelay(1200)
+                .setInterpolator(ALPHA_OUT)
+                .withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                mCmremixLabel.setVisibility(View.GONE);
+                animateStatusBarShow(mNotificationIconArea, animate);
+            }
+        });
     }
 
     @Override
@@ -3770,6 +3821,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
             else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
                 mScreenOn = false;
+                mShowLabel = true;
                 notifyNavigationBarScreenOn(false);
                 notifyHeadsUpScreenOn(false);
                 finishBarAnimations();

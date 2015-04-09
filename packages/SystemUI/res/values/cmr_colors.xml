@@ -34,4 +34,7 @@
     <!-- Power menu on navring targets -->
     <string name="navring_action_power_menu">Power Menu</string>
 
+    <!-- Greeting -->
+    <string name="cmremix_label">Welcome to CMRemix Roms</string>
+
 </resources>
