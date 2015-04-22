@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <!-- CMRemix Logo -->
+  <java-symbol type="drawable" name="cmremix" />
 
   <!-- Config IME switcher -->
   <java-symbol type="bool" name="config_show_IMESwitcher" />

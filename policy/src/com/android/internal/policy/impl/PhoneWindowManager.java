@@ -6988,7 +6988,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         mBootMsgDialog.setTitle(R.string.android_start_title);
                     }
                     mBootMsgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    mBootMsgDialog.setIcon(com.android.internal.R.drawable.arter97);
+                    mBootMsgDialog.setIcon(com.android.internal.R.drawable.cmremix);
                     mBootMsgDialog.setIndeterminate(true);
                     mBootMsgDialog.getWindow().setType(
                             WindowManager.LayoutParams.TYPE_BOOT_PROGRESS);
@@ -7002,8 +7002,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     mBootMsgDialog.setCancelable(false);
                     mBootMsgDialog.show();
                 }
-                mBootMsgDialog.setMessage("Powered By arter97 Optimizations\n\n" + msg
-                + "\n\nCMRemix Lollipop 5.1.0 Official");
+                mBootMsgDialog.setMessage("Powered By SaberMod Optimizations\n\n" + msg
+                + "\n\nCMRemix Lollipop 5.1.1 Official");
             }
         });
     }
