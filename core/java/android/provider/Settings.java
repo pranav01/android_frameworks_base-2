@@ -3751,6 +3751,13 @@ public final class Settings {
         public static final String LIVE_DISPLAY_HINTED = "live_display_hinted";
 
         /**
+         * Whether "None" mode will act as "Silent"
+         * Effectively allowing alarms to always use the alarm stream volume when true.
+         * @hide
+         */
+        public static final String NONE_IS_SILENT = "none_is_silent";
+
+        /**
          * Whether to prevent loud volume levels when headset is first plugged in.
          * @hide
          */
