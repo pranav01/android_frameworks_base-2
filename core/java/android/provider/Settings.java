@@ -3807,14 +3807,6 @@ public final class Settings {
          */
         public static final String SAFE_HEADSET_VOLUME = "safe_headset_volume";
 
-        /**
-         * Control the display of the action overflow button within app UI.
-         * 0 = use system default
-         * 1 = force on
-         * @hide
-         */
-        public static final String UI_OVERFLOW_BUTTON = "ui_overflow_button";
-
         /** Whether to collapse panel when quick settings tile is pressed.
          *
          * @hide
@@ -3914,13 +3906,6 @@ public final class Settings {
          * @hide
          */
         public static final String SCREENSHOT_DELAY = "screenshot_delay";
-
-        /**
-         * Config for advanced power menu
-         *
-         * @hide
-         */
-        public static final String QUICK_TILE_CONFIG = "quick_tile_config";
 
         /**
          * Whether to show the weather info on the lock screen

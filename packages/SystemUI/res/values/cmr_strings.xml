@@ -54,9 +54,6 @@
     <string name="shortcut_recovery">Recovery</string>
     <string name="shortcut_toggle_title">Action to perform</string>
 
-    <!-- Kill app toast -->
-    <string name="app_killed_message">App Killed</string>
-
     <!-- Screenrecord Notification Ticker -->
     <string name="screenrecord_notif_ticker">Screen is being recorded</string>
 
