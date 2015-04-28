@@ -123,5 +123,9 @@
   <java-symbol type="drawable" name="ic_shortcut_action_screenshot" />
   <java-symbol type="drawable" name="ic_shortcut_action_search" />
 
+   <!-- global actions (zen mode buttons) -->
+  <java-symbol type="id" name="option4" />
+  <java-symbol type="id" name="option5" />
+
 </resources>
 
