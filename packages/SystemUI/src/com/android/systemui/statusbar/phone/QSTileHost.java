@@ -38,7 +38,6 @@ import com.android.systemui.qs.QSTile;
 import com.android.systemui.qs.tiles.AdbOverNetworkTile;
 import com.android.systemui.qs.tiles.AirplaneModeTile;
 import com.android.systemui.qs.tiles.ApnTile;
-import com.android.systemui.qs.tiles.AmbientDisplayTile;
 import com.android.systemui.qs.tiles.BatterySaverTile;
 import com.android.systemui.qs.tiles.BluetoothTile;
 import com.android.systemui.qs.tiles.BrightnessTile;
@@ -366,8 +365,6 @@ public class QSTileHost implements QSTile.Host {
                 return new AppCircleBarTile(this);
             case QSConstants.TILE_USB_TETHER:
                 return new UsbTetherTile(this);
-            case QSConstants.TILE_AMBIENT_DISPLAY:
-                return new AmbientDisplayTile(this);
             case QSConstants.TILE_MUSIC:
                 return new MusicTile(this);
             default:
