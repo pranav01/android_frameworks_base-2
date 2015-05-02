@@ -3723,6 +3723,21 @@ public final class Settings {
                 "mute_annoying_notifications_threshold";
 
         /**
+         * Whether to display the gesture anywhere trigger region or not.
+         * @hide
+         */
+        @ChaosLab(name="Identicons", classification=Classification.NEW_FIELD)
+        public static final String IDENTICONS_ENABLED = "identicons_enabled";
+
+        /**
+         * Identicons style setting.
+         * @hide
+         */
+        @ChaosLab(name="Identicons", classification=Classification.NEW_FIELD)
+        public static final String IDENTICONS_STYLE = "identicons_style";
+
+
+        /**
          * Whether navigation bar is placed on the left side in landscape mode
          * @hide
          */
