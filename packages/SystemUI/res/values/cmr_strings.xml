@@ -94,4 +94,8 @@
     <!-- TRDS -->
     <string name="quick_settings_trds_label">TRDS</string>
 
+    <!-- App SideBar tile -->
+    <string name="quick_settings_appsidebar_on">AppSideBar On</string>
+    <string name="quick_settings_appsidebar_off">AppSideBar Off</string>
+
 </resources>
