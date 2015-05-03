@@ -94,9 +94,6 @@
     <java-symbol type="style" name="Animation.Toast.GrowFadeBottom" />
     <java-symbol type="style" name="Animation.Toast.Translucent" />
 
-  <!-- Ambient Display-->
-  <java-symbol type="bool" name="config_dozeUseAccelerometer" />
-
   <!-- Shortcut actions -->
   <java-symbol type="drawable" name="ic_shortcut_action_silent" />
   <java-symbol type="drawable" name="ic_shortcut_action_theme_switch" />
@@ -130,9 +127,6 @@
   <!-- UI theme mode -->
   <java-symbol type="integer" name="config_uiThemeMode" />
   <java-symbol type="string" name="theme_auto_switch_mode_error" />
-
-  <!-- Doze mode -->
-  <java-symbol type="bool" name="config_doze_enabled_by_default" />
 
 </resources>
 
