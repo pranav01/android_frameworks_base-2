@@ -32,4 +32,7 @@
     <!-- Doze: alternate schedule -->
     <string name="doze_pulse_schedule_alternate" translatable="false">1s</string>
 
+    <!-- Doze: shake accelerometer threshold minimum is 2 and maximum is 10-->
+    <integer name="doze_shake_accelerometer_threshold">10</integer>
+
 </resources>
