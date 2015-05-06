@@ -96,7 +96,6 @@ import android.os.SystemProperties;
 import android.os.Trace;
 import android.os.UserHandle;
 import android.os.WorkSource;
-import android.os.SystemService;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.EventLog;
@@ -308,7 +307,6 @@ public class WindowManagerService extends IWindowManager.Stub
     private static final String SIZE_OVERRIDE = "ro.config.size_override";
 
     private static final int MAX_SCREENSHOT_RETRIES = 3;
-    private static final int WINDOW_EXITING_TIME_OUT = 6000;
 
     // The flag describing a full screen app window (where the app takes care of drawing under the
     // SystemUI bars)
@@ -6602,10 +6600,6 @@ public class WindowManagerService extends IWindowManager.Stub
             return false;
         }
 
-        if(SystemService.isRunning("bootanim")) {
-            return false;
-        }
-
         ScreenRotationAnimation screenRotationAnimation =
                 mAnimator.getScreenRotationAnimationLocked(Display.DEFAULT_DISPLAY);
         if (screenRotationAnimation != null && screenRotationAnimation.isAnimating()) {
@@ -10026,11 +10020,6 @@ public class WindowManagerService extends IWindowManager.Stub
                 final int N = windows.size();
                 for (i=N-1; i>=0; i--) {
                     WindowState w = windows.get(i);
-		    if(w.mExiting && (w.mLastFreezeDuration > WINDOW_EXITING_TIME_OUT)
-                        && w.mInputChannel == null) {
-                        removeWindowInnerLocked(w.mSession, w);
-                    }
-
                     final TaskStack stack = w.getStack();
                     if (stack == null && w.getAttrs().type != TYPE_PRIVATE_PRESENTATION) {
                         continue;
