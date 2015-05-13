@@ -45,14 +45,14 @@
     <string name="accessibility_quick_settings_location_high_accuracy">Location reporting: high accuracy mode.</string>
 
     <!-- Content description of the ambient display tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_ambient_display_off">Ambient Display off.</string>
+    <string name="accessibility_quick_settings_ambient_display_off">Ambient display off.</string>
     <!-- Content description of the ambient display tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_ambient_display_on">Ambient Display on.</string>
+    <string name="accessibility_quick_settings_ambient_display_on">Ambient display on.</string>
 
     <!-- Announcement made when ambient display changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient Display turned off.</string>
+    <string name="accessibility_quick_settings_ambient_display_changed_off">Ambient display turned off.</string>
     <!-- Announcement made when ambient display changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient Display turned on.</string>
+    <string name="accessibility_quick_settings_ambient_display_changed_on">Ambient display turned on.</string>
 
     <string name="accessibility_dpad_left">Cursor left</string>
     <string name="accessibility_dpad_right">Cursor right</string>
@@ -120,6 +120,8 @@
     <string name="quick_settings_tile_flashlight_not_title">Flashlight is on</string>
     <string name="quick_settings_tile_flashlight_not_summary">Tap to turn off</string>
     <string name="quick_settings_ambient_display_label">Ambient Display</string>
+    <string name="quick_settings_heads_up_label">Heads up</string>
+    <string name="quick_settings_ambient_display_label">Ambient display</string>
 
     <!-- Weather string format in expanded statusbar header -->
     <string name="status_bar_expanded_header_weather_format"><xliff:g id="temp">%1$s</xliff:g> - <xliff:g id="condition">%2$s</xliff:g></string>
