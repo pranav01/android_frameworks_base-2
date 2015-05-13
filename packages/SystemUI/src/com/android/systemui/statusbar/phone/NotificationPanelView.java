@@ -2186,7 +2186,7 @@ public class NotificationPanelView extends PanelView implements
                     resolver, Settings.CMREMIX.QS_SMART_PULLDOWN, 0,
                     UserHandle.USER_CURRENT);
             mStatusBarLockedOnSecureKeyguard = Settings.Secure.getIntForUser(
-                    resolver, Settings.Secure.STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD, 1,
+                    resolver, Settings.Secure.STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD, 0,
                     UserHandle.USER_CURRENT) == 1;
             mQSCSwitch = Settings.System.getInt(
                     resolver, Settings.System.QS_COLOR_SWITCH, 0) == 1;
