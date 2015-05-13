@@ -119,7 +119,6 @@
     <string name="quick_settings_music_pause">Pause</string>
     <string name="quick_settings_tile_flashlight_not_title">Flashlight is on</string>
     <string name="quick_settings_tile_flashlight_not_summary">Tap to turn off</string>
-    <string name="quick_settings_ambient_display_label">Ambient Display</string>
     <string name="quick_settings_heads_up_label">Heads up</string>
     <string name="quick_settings_ambient_display_label">Ambient display</string>
     <string name="quick_settings_custom_tile_detail_title">Custom Tile</string>
