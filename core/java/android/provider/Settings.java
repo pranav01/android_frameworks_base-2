@@ -4535,6 +4535,13 @@ public final class Settings {
         public static final String VOLUME_KEYS_CONTROL_RING_STREAM =
                 "volume_keys_control_ring_stream";
 
+        /**
+         * The statusbar configuration to be used for its creation in SystemUI
+         * Fallback is the config_statusBarComponent value
+         * @hide
+         */
+        public static final String STATUSBAR_COMPONENT = "statusbar_component";
+
     }
 
     /**
