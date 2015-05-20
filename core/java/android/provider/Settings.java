@@ -4029,6 +4029,18 @@ public final class Settings {
          */
         public static final String PIE_BUTTON_PRESSED_COLOR = "pie_button_pressed_color";
 
+		/**
+         * Heads Up background color
+         * @hide
+         */
+        public static final String HEADS_UP_BG_COLOR = "heads_up_bg_color";
+
+        /**
+         * Heads Up text color
+         * @hide
+         */
+        public static final String HEADS_UP_TEXT_COLOR = "heads_up_text_color";
+
         /**
          * Pie button long press color
          * @hide
