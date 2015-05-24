@@ -3652,6 +3652,12 @@ public final class Settings {
         public static final String CLOCK_USE_SECOND = "clock_use_second";
 
         /**
+         * Color of the expanded status bar header background
+         * @hide
+         */
+        public static final String STATUS_BAR_EXPANDED_HEADER_BG_COLOR = "status_bar_expanded_header_bg_color";
+
+        /**
          * Display style of the status bar battery information
          * 0: Display the battery an icon in portrait mode
          * 2: Display the battery as a circle
